@@ -1,0 +1,28 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" class="sr-only">{{modalHeader}}</h4>
+    <button class="close" id="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+         <div>
+          <label for="Current day">Selected date : </label>
+          <input [formControl]="day" type="text" [(ngModel)]="modalContent">
+        </div>
+        <div>
+          <label for="No. of Hours.">No. Of Hours : </label>
+          <input [formControl]="time" type="text">
+        </div>
+        <div>
+          <label for="Description">Description : </label>
+          <input [formControl]="desc" type="text">
+        </div>
+        
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button class="btn btn-danger" (click)="closeModal()">Close</button>
+      </form>
+  </div>
+  
+</div>
