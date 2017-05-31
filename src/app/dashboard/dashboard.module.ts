@@ -10,6 +10,7 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
 
 import { CalendarService } from './timesheet/calendar.service';
 import { TimesheetdataComponent } from './timesheet/timesheetdata/timesheetdata.component';
+import { PayrollComponent } from './payroll/payroll.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { TimesheetdataComponent } from './timesheet/timesheetdata/timesheetdata.
     entryComponents: [
      TimesheetdataComponent
   ],
-  declarations: [DashboardComponent, TimesheetComponent,TimesheetdataComponent],
+  declarations: [DashboardComponent, TimesheetComponent,TimesheetdataComponent, PayrollComponent],
   providers: [CalendarService]
 })
 export class DashboardModule { }

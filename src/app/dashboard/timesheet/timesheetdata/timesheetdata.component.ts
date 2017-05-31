@@ -32,6 +32,7 @@ export class TimesheetdataComponent implements OnInit {
     this.TimeSheetService.data = values;
     this.TimeSheetService.postService().subscribe(res =>{
       console.log(res);
+      console.log(res["code"]);
     });
   }
   ngOnInit() {
