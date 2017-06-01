@@ -30,7 +30,8 @@ var schema = new Schema({
     reportingTo: [{type: Schema.Types.ObjectId, ref: 'Employee'}],
     reportingToHim: [{type: Schema.Types.ObjectId, ref: 'Employee'}],
     firstLogin:{type:Boolean,default:true},
-    otp:{type:String, expireAfterSeconds: 300 }
+    otp:{type:String, expireAfterSeconds: 300 },
+    timesheets: [{type: Schema.Types.ObjectId, ref: 'TimeSheets'}]
     //tmesheets: [{type: Schema.Types.ObjectId, ref: 'TimeSheets'}]
 });
 schema.plugin(autoIncrement.plugin, {

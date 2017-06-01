@@ -7,7 +7,7 @@ import * as jQuery from 'jquery';
   templateUrl: './baFullCalendar.html'
 })
 export class BaFullCalendar {
-
+  @Input() Events:Object;
   @Input() baFullCalendarConfiguration:Object;
   @Input() baFullCalendarClass:string;
   @Output() onCalendarReady = new EventEmitter<any>();
@@ -15,19 +15,8 @@ export class BaFullCalendar {
   @ViewChild('baFullCalendar') public _selector:ElementRef;
 
   ngAfterViewInit() {
-    let calendar = jQuery(this._selector.nativeElement).fullCalendar(this.baFullCalendarConfiguration,
-        {
-        events: [
-        {
-            title  : 'fayaz',
-            start  : '2017-05-01'
-        },
-        {
-            title  : 'fayaz shaik',
-            start  : '2017-05-05',
-            end    : '2017-05-07'
-        }]
-      });
+    let calendar = jQuery(this._selector.nativeElement).fullCalendar(this.baFullCalendarConfiguration);
     this.onCalendarReady.emit(calendar);
+
   }
 }

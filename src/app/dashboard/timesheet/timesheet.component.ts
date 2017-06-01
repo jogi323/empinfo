@@ -23,15 +23,16 @@ export class TimesheetComponent implements OnInit {
 
   public onCalendarReady(calendar):void {
     this._calendar = calendar;
+    console.log(calendar);
   }
 
   private _onSelect(start, end):void {
     
     if (this._calendar != null) {
-      console.log(start._d );
+      //console.log(start._d );
       var day = start._d;
       var date = day.toLocaleDateString();
-      console.log(date); 
+      //console.log(date); 
       const activeModal = this.modalService.open(TimesheetdataComponent, {size: 'lg',backdrop: 'static'});
       activeModal.componentInstance.modalHeader = 'Child modal';
       activeModal.componentInstance.modalContent = day;
