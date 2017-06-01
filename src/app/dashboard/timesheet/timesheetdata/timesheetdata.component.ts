@@ -28,7 +28,7 @@ export class TimesheetdataComponent implements OnInit {
 
   public onSubmit(values:Object):void {
    console.log(values);
-    this.TimeSheetService.url = "http://localhost:8080/users/timesheet";
+    this.TimeSheetService.url = "http://localhost:8080/timesheet";
     this.TimeSheetService.data = values;
     this.TimeSheetService.postService().subscribe(res =>{
       console.log(res);

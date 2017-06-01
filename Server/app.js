@@ -9,6 +9,8 @@ var multer = require("multer");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var timesheet = require('./routes/timesheet');
+
 
 var app = express();
 //File Upload
@@ -42,6 +44,7 @@ app.use(cors());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/timesheet', timesheet);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
