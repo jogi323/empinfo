@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileUploader,ParsedResponseHeaders } from 'ng2-file-upload';
 import { Router } from '@angular/router';
 import {AppService} from "../../../app.service";
+import swal from "sweetalert";
 
 @Component({
   selector: 'app-employee-register',
@@ -86,19 +87,20 @@ var upload = this.uploader["queue"][0];
  upload.upload();
  this.uploader._onCompleteItem = (item: any, response: string, status: number,
       headers: ParsedResponseHeaders) => {
-        console.log("oncomplete call")
+        //console.log("oncomplete call")
       // this.uploaded.emit(item.file.size);
-      console.log(item);
+      //console.log(item);
     };
 
       this.register.url="http://localhost:8080/users/createEmployee";
         user.fileName =upload["file"]["name"];
-        console.log(user);
+        //console.log(user);
       this.register.data = user;
 
       this.register.postService().subscribe(res=>{
-        console.log(res)
-        alert("Successfully registered")
+        //console.log(res)
+        swal("Successfully registered");
+        this.router.navigate(["dashboard"]);
     });
 }
 

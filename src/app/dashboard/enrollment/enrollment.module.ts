@@ -9,6 +9,7 @@ import {AppService} from "../../app.service";
 
 import { EnrollmentComponent } from './enrollment.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
+import { EditEmployee } from './edit-employee/edit-employee.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
     NgaModule,
     EnrollmentRoutingModule
   ],
-  declarations: [EnrollmentComponent, EmployeeRegisterComponent,FileSelectDirective],
+  declarations: [EnrollmentComponent, EmployeeRegisterComponent,FileSelectDirective,EditEmployee],
   providers:[AppService]
 })
 export class EnrollmentModule { }

@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { FpasswordComponent } from './fpassword/fpassword.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { FpasswordComponent } from './fpassword/fpassword.component';
     FlashMessagesModule
   ],
   declarations: [HomeComponent, SigninComponent, SignupComponent, ChangepasswordComponent, ForgotpasswordComponent, FpasswordComponent],
-  providers:[AppService]
+  providers:[AppService,AuthGuard]
 })
 export class HomeModule { }

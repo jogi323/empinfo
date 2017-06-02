@@ -45,6 +45,7 @@ export class ForgotpasswordComponent implements OnInit {
       });
 
    }else if(this.isOtp){
+     //console.log(values);
       this.FpService.url="http://localhost:8080/users/checkotp";
       this.FpService.data=values;
       this.FpService.forgotPasswordEmail = values['email'];
@@ -52,8 +53,9 @@ export class ForgotpasswordComponent implements OnInit {
       this.FpService.postService().subscribe(res=>{
         //console.log(res);
         if(res["status"] == 200){
-          
           this.router.navigate(['resetpassword']);
+        }else if(res["status"] == 404){
+          swal("Please Enter Valid OTP!");
         }
       });
    }

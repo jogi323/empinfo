@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { FpasswordComponent } from './fpassword/fpassword.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {

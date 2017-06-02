@@ -14,7 +14,7 @@ export class TimesheetdataComponent implements OnInit {
   public time:AbstractControl;
   public desc:AbstractControl;
   public submitted:boolean = false;
-
+  token;
   constructor(fb:FormBuilder,private activeModal: NgbActiveModal,private TimeSheetService:AppService) {
     this.form = fb.group({
       'day': ['',Validators.compose([Validators.required])],
@@ -27,9 +27,10 @@ export class TimesheetdataComponent implements OnInit {
   }
 
   public onSubmit(values:Object):void {
-     this.activeModal.close();
+    this.activeModal.close();
    console.log(values);
-    this.TimeSheetService.url = "http://localhost:8080/timesheet";
+    this.TimeSheetService.url = "http://localhost:8080/timesheet"+ this.token;
+    console.log( this.TimeSheetService.url);
     this.TimeSheetService.data = values;
     this.TimeSheetService.postService().subscribe(res =>{
       console.log(res);
@@ -37,6 +38,12 @@ export class TimesheetdataComponent implements OnInit {
     });
   }
   ngOnInit() {
+      //this.token =localStorage.getItem("id_token");
+    
+      this.token = localStorage.getItem('id_token')
+            ? '?token=' + localStorage.getItem('id_token')
+            : '';
+              console.log(this.token);
   }
  closeModal() {
     this.activeModal.close();

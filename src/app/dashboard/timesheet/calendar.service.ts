@@ -3,12 +3,16 @@ import {BaThemeConfigProvider} from '../../theme';
 
 @Injectable()
 export class CalendarService {
-
+ data;
   constructor(private _baConfig:BaThemeConfigProvider) {
   }
 
   getData() {
-
+    this.data ={
+      time:8,
+      date:'01-06-2017',
+      desc:"JGYH"
+    }
     let dashboardColors = this._baConfig.get().colors.dashboard;
     return {
       header: {

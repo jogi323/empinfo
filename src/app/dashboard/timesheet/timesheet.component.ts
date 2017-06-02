@@ -23,7 +23,7 @@ export class TimesheetComponent implements OnInit {
 
   public onCalendarReady(calendar):void {
     this._calendar = calendar;
-    console.log(calendar);
+    //console.log(calendar);
   }
 
   private _onSelect(start, end):void {

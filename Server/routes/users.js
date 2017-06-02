@@ -35,5 +35,7 @@ router.post('/timesheet', function(req, res, next) {
 router.get('/managers', function(req, res, next) {
    controller.managersList(req,res);
 });
-
+router.get('/usersdata', function(req, res) {
+    controller.allUsers(req, res);
+});
 module.exports = router;

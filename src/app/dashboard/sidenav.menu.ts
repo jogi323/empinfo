@@ -34,6 +34,15 @@ export const PAGES_MENU = [
                 icon: 'ion-gear-a',
               }
             }
+          },
+          {
+            path: 'editemployee',
+            data: {
+              menu: {
+                title: 'Edit Employee',
+                icon: 'ion-gear-a',
+              }
+            }
           }
         ]
       },

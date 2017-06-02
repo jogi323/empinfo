@@ -16,8 +16,9 @@ exports.login = function(req,res){
             res.json({code:0,msg:'Invalid Credentials'});
         }else {
             var secret = '123456';
-            var token= jwt.sign({data: 'data'},secret);
+            var token = jwt.sign({data: data}, 'secret', {expiresIn: 7200});
             console.log(token);
+            console.log(data);
             res.json({code:1,data:data,token:token});
         }
     })
@@ -119,7 +120,7 @@ exports.createEmployee = function (req, res) {
         cost: req.body.ctc,
         empImage :req.body.fileName,
         firstLogin: true,
-        otp:'',
+        otp:'558525',
     });
 
     //  var name1 = firstname.toString().replace(/ /g,'').slice(0,4);
@@ -233,7 +234,7 @@ exports.managersList = function(req,res){
 exports.generateOTP=function(req,res){
     var email=req.body.email;
     var otp=Math.floor(Math.random()*90000) + 100000;
-    console.log(otp);
+    //console.log(otp);
     Employee.find({personalEmail:email },function(err,data){
         if(err){
             throw err;
@@ -280,9 +281,12 @@ exports.generateOTP=function(req,res){
 }
 //OTP Validation
 exports.checkOtp=function(req,res){
+   var email=req.body.email;
    var otp=req.body.otp;
-   //console.log(otp);
-   Employee.find({otp:otp},function(err,data){
+   console.log("cHECK otp"+otp);
+  
+   Employee.find({personalEmail:email,otp:otp},function(err,data){
+       console.log(data[0]);
        if(err){
            throw err;
        }else if(data[0]){
@@ -292,6 +296,7 @@ exports.checkOtp=function(req,res){
            res.json({status:404,msg:'Invalid Otp'});
        }
    })
+
 }
 //TimeSheet Action
 exports.performAction = function(req, res){
@@ -469,4 +474,13 @@ exports.update = function(){
                         console.log(data);
                     }
                     );
+}
+exports.allUsers = function(req, res) {
+    Employee.find(function(err, data) {
+        if (err) {
+            throw err;
+        } else {
+            res.json({ status: 200, data: data })
+        }
+    })
 }

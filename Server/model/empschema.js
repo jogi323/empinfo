@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var connection =mongoose.connect('mongodb://empinfo:empinfo@ds155631.mlab.com:55631/empinfo');
 var  autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
+var TimeSheets = require('./timesheet');
 
 var schema = new Schema({
     employeeId: {type: Number, unique: true},
@@ -31,7 +32,7 @@ var schema = new Schema({
     reportingToHim: [{type: Schema.Types.ObjectId, ref: 'Employee'}],
     firstLogin:{type:Boolean,default:true},
     otp:{type:String, expireAfterSeconds: 300 },
-    timesheets: [{type: Schema.Types.ObjectId, ref: 'TimeSheets'}]
+    timesheets: {type: Schema.Types.ObjectId, ref: 'TimeSheets'}
     //tmesheets: [{type: Schema.Types.ObjectId, ref: 'TimeSheets'}]
 });
 schema.plugin(autoIncrement.plugin, {
