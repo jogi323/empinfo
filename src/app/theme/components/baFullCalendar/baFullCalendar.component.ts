@@ -16,6 +16,7 @@ export class BaFullCalendar {
 
   ngAfterViewInit() {
     let calendar = jQuery(this._selector.nativeElement).fullCalendar(this.baFullCalendarConfiguration);
+    
     this.onCalendarReady.emit(calendar);
 
   }

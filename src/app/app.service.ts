@@ -3,6 +3,7 @@ import {Http,Response,Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
 
+
 @Injectable()
 export class AppService{
   url:string;
@@ -38,7 +39,7 @@ return this._http.post(this.url,this.data,{headers:headers}).map(res=>res.json()
  loggedIn(){
     return tokenNotExpired();
  }
- 
+
 }
 // import { Injectable } from '@angular/core';
 

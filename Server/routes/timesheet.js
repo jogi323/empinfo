@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
    timesheetController.insertData(req,res);
 });
 
-router.get('/', function(req, res, next) {
+router.get('/getdata/:id', function(req, res, next) {
    timesheetController.getData(req, res);
 });
 

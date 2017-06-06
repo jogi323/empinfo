@@ -92,6 +92,11 @@ exports.insertData = function(req, res){
                                 timesheetData.data.id(yearId).yearData.id(monthId).monthData.push({dayData:dWork, day:rDay})
                                 timesheetData.save();
                                 console.log("day data saved");
+                                res.json({
+                                    code:0,
+                                    message: 'Saved message',
+                                    
+                                });
                             }
                         }else{
                             console.log("month not matched");
@@ -100,6 +105,10 @@ exports.insertData = function(req, res){
                             timesheetData.data.id(yearId).yearData.push({monthData:dayWork, month:rMonth})
                             timesheetData.save();
                             console.log("month created");
+                            res.status(201).json({
+                                    message: 'Saved message',
+                                    obj: result
+                                });
                         }
                     }//if year present and mathes the received year
 
@@ -114,6 +123,10 @@ exports.insertData = function(req, res){
                     timesheetData.data.push({year:rYear, yearData:mWork})
                     timesheetData.save();
                     console.log("saved with year");
+                    res.status(201).json({
+                        message: 'Saved message',
+                        obj: result
+                    });
                 }
             })
             
@@ -157,7 +170,9 @@ exports.insertData = function(req, res){
 }
 
 exports.getData = function(req, res){
-    TimeSheet.findById("59319ab9af8e430bf8f8bf26")
+    var id = req.params.id;
+    console.log("Timesheet id"+id);
+    TimeSheet.findById(id)
              .populate('employee','joinedOn')
              .exec(function(err, tsData){
                 if (err) {

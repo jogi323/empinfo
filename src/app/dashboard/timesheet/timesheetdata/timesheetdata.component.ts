@@ -28,13 +28,13 @@ export class TimesheetdataComponent implements OnInit {
 
   public onSubmit(values:Object):void {
     this.activeModal.close();
-   console.log(values);
+   // console.log(values);
     this.TimeSheetService.url = "http://localhost:8080/timesheet"+ this.token;
-    console.log( this.TimeSheetService.url);
+    //console.log( this.TimeSheetService.url);
     this.TimeSheetService.data = values;
     this.TimeSheetService.postService().subscribe(res =>{
       console.log(res);
-      console.log(res["code"]);
+      console.log(res["status"]);
     });
   }
   ngOnInit() {
@@ -43,7 +43,7 @@ export class TimesheetdataComponent implements OnInit {
       this.token = localStorage.getItem('id_token')
             ? '?token=' + localStorage.getItem('id_token')
             : '';
-              console.log(this.token);
+              // console.log(this.token);
   }
  closeModal() {
     this.activeModal.close();
