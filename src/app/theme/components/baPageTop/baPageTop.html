@@ -2,12 +2,20 @@
      [ngClass]="{scrolled: isScrolled}">
   <a routerLink="/dashboard" class="al-logo clearfix"><span>Inno</span>Space</a>
   <a href (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
-
+<div class="search-main">
   <div class="search">
-      <input id="searchInput" type="text" placeholder="Search for...">
-      <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
+      <!--<input id="searchInput" type="text" placeholder="Search for...">-->
+      <typeahead
+        [(ngModel)]="selectedEmp"
+        [list]="empNames"
+        [searchProperty]="'personalEmail'|| 'employeeName' || 'id'" [displayProperty]="'employeeName'"
+        [maxSuggestions]="2"
+        (suggestionSelected)="empSelected($event)"
+        placeholder="Begin typing a fruit">
+      </typeahead>
   </div>
-
+  <div class="search-icon"><i class="ion-ios-search-strong" (click)="startSearch()"></i></div>
+</div>
   <div class="user-profile clearfix">
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">

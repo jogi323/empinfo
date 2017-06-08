@@ -42,7 +42,7 @@ schema.plugin(autoIncrement.plugin, {
     incrementBy: 1
 });
 
-// employeeId, employeeName, companyEmail are set aindex to search the employee using those fields
+// employeeId, employeeName, companyEmail are set a index to search the employee using those fields
 schema.index({employeeId: "text", employeeName:"text", companyEmail:"text" });
 
 //exporting the schema 

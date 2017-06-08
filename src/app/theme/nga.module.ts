@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
 import { AppTranslationModule } from '../app.translation.module';
+import { Typeahead } from 'ng2-typeahead';
 
 import {
   BaThemeConfig
@@ -72,7 +73,8 @@ const NGA_COMPONENTS = [
   BaPageTop,
   BaPictureUploader,
   BaSidebar,
-  BaFileUploader
+  BaFileUploader,
+  Typeahead ,
 ];
 
 const NGA_DIRECTIVES = [
@@ -110,9 +112,11 @@ const NGA_VALIDATORS = [
     CommonModule,
     RouterModule,
     FormsModule,
+
     ReactiveFormsModule,
     AppTranslationModule,
-    NgUploaderModule
+    NgUploaderModule,
+    
   ],
   exports: [
     ...NGA_PIPES,

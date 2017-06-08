@@ -15,7 +15,7 @@ const routes: Routes = [
         path : '' , component : SigninComponent
       },
       {
-        path : 'changepassword', component : ChangepasswordComponent
+        path : 'changepassword', component : ChangepasswordComponent,canActivate:[AuthGuard]   
       },
       {
         path : 'forgotpassword', component : ForgotpasswordComponent

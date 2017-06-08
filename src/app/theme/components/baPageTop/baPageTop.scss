@@ -200,3 +200,9 @@
     cursor: pointer;
   }
 }
+.typeahead-suggestions {
+      z-index: 1000 !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: scroll !important;
+}

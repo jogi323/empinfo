@@ -175,6 +175,7 @@ exports.getData = function(req, res){
     TimeSheet.findById(id)
              .populate('employee','joinedOn')
              .exec(function(err, tsData){
+                 // console.log(tsData);
                 if (err) {
                     return res.status(500).json({
                         title: 'An error occurred',

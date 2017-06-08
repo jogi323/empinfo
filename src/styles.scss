@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.typeahead-suggestions {
+      z-index: 1000 !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: scroll !important;
+}
+.search { float: left;}
+.search .ion-ios-search-strong { float: right; z-index: 999999 !important;
+    position: relative !important;
+}
+.search-icon i { position: relative; top: 30px;}
+.al-user-profile {
+    margin-top: -15px;
+}

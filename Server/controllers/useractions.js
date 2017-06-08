@@ -17,8 +17,8 @@ exports.login = function(req,res){
         }else {
             var secret = '123456';
             var token = jwt.sign({data: data}, 'secret', {expiresIn: 7200});
-            console.log(token);
-            console.log(data);
+            // console.log(token);
+            // console.log(data);
             res.json({code:1,data:data,token:token});
         }
     })
@@ -481,6 +481,16 @@ exports.allUsers = function(req, res) {
             throw err;
         } else {
             res.json({ status: 200, data: data })
+        }
+    })
+}
+exports.search = function(req,res){
+    var id = req.body.id;
+    Employee.find({employeeId:3},function(err,data){
+        if(err){
+            throw err;
+        }else{
+            console.log(data);
         }
     })
 }

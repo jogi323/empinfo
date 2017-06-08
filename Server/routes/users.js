@@ -38,4 +38,8 @@ router.get('/managers', function(req, res, next) {
 router.get('/usersdata', function(req, res) {
     controller.allUsers(req, res);
 });
+
+router.get('/search', function(req, res, next) {
+   controller.search(req,res);
+});
 module.exports = router;
