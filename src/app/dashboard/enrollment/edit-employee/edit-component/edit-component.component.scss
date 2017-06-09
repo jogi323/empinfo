@@ -1,0 +1,25 @@
+.container{
+    background-color: #4d5147;
+}
+.row {
+    margin-bottom: 10px;
+}
+select#select{
+    height: 40px;
+}
+label{
+    color: white;
+}
+form{
+    margin-top: 7%;
+}
+button#close {
+    float: right;
+    margin-right: -48%;
+    margin-top: 2%;
+    color: red;
+    font-weight: 400;
+}
+button.btn.btn-danger.btn-lg {
+    float: right;
+}

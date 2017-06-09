@@ -28,13 +28,13 @@ export class ForgotpasswordComponent implements OnInit {
    }
   public onSubmit(values:Object):void {
    if(!this.isOtp){
-     console.log(values["email"]);
+    // console.log(values["email"]);
       this.FpService.url = "http://localhost:8080/users/otpgeneration";
       this.FpService.data = values;
       this.FpService.postService().subscribe(res=>{
-        console.log(res);
+      //  console.log(res);
         this.data=res;
-        console.log(this.data);
+      // console.log(this.data);
         if(this.data['status']==200){
           this.isOtp = true;
           swal("OTP has sent to your Email-ID!");
@@ -45,13 +45,13 @@ export class ForgotpasswordComponent implements OnInit {
       });
 
    }else if(this.isOtp){
-     //console.log(values);
+     // console.log(values);
       this.FpService.url="http://localhost:8080/users/checkotp";
       this.FpService.data=values;
       this.FpService.forgotPasswordEmail = values['email'];
       //console.log(this.FpService.forgotPasswordEmail);
       this.FpService.postService().subscribe(res=>{
-        //console.log(res);
+        // console.log(res);
         if(res["status"] == 200){
           this.router.navigate(['resetpassword']);
         }else if(res["status"] == 404){

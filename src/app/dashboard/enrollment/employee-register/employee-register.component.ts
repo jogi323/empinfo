@@ -17,8 +17,7 @@ export class EmployeeRegisterComponent implements OnInit {
        options:object;
         managers:any;
  private uploader: FileUploader;
-  constructor(private router:Router,
-  private register:AppService,) {
+  constructor(private router:Router,private register:AppService,) {
 
   this.user = {
         ename: "" ,
