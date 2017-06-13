@@ -5,14 +5,22 @@
 <div class="search-main">
   <div class="search">
       <!--<input id="searchInput" type="text" placeholder="Search for...">-->
-      <typeahead
+      <!--<typeahead
         [(ngModel)]="selectedEmp"
         [list]="empNames"
         [searchProperty]="'personalEmail'|| 'employeeName' || 'id'" [displayProperty]="'employeeName'"
         [maxSuggestions]="2"
         (suggestionSelected)="empSelected($event)"
         placeholder="Begin typing a fruit">
-      </typeahead>
+      </typeahead>-->
+        <input ngui-auto-complete [source]="empNames"
+        id="model3"
+        [(ngModel)]="model3"
+        placeholder="enter text"
+        value-formatter="employeeName"
+        list-formatter="(employeeId) employeeName personalEmail"
+        [match-formatted]="true" />
+      <br/><p class="sr-only">selected model3: {{model3 | json}}</p><br/><br/>
   </div>
   <div class="search-icon"><i class="ion-ios-search-strong" (click)="startSearch()"></i></div>
 </div>
