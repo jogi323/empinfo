@@ -2,7 +2,7 @@ import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GlobalState} from '../../../global.state';
 import {AppService} from '../../../app.service'; 
-import { Typeahead } from 'ng2-typeahead';
+// import { Typeahead } from 'ng2-typeahead';
 
 @Component({
   selector: 'ba-page-top',
@@ -13,6 +13,7 @@ export class BaPageTop implements OnInit{
   empName;
   image_path ;
   empNames;
+  
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
@@ -21,6 +22,7 @@ export class BaPageTop implements OnInit{
       this.isMenuCollapsed = isCollapsed;
     });
     this.empNames = [];
+    
   }
 ngOnInit(){
   // Image Path from Local Storage 
@@ -39,7 +41,7 @@ this.navbarService.url = "http://localhost:8080/users/usersdata";
   //     element.id = id;
   //     // this.empNames.push({id:id});
   //   });
-  //  console.log(this.empNames );
+    console.log(this.empNames );
   })
 }
  fruitName: string;
