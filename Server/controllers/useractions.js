@@ -484,13 +484,28 @@ exports.allUsers = function(req, res) {
         }
     })
 }
-exports.search = function(req,res){
-    var id = req.body.id;
-    Employee.find({employeeId:3},function(err,data){
+exports.empdetails = function(req,res){
+    var id = req.params.id;
+    console.log(id);
+    Employee.find({_id:id},function(err,data){
         if(err){
             throw err;
         }else{
             console.log(data);
+            res.json({code:0,data:data});
         }
     })
+}
+exports.updateUser = function(req,res){
+   var id=req.body.id;
+   console.log(id);
+  Employee.update({employeeId:id,personalEmail:req.body.email},{$set:{employeeType: req.body.etype, role: req.body.erole,designation: req.body.designation,primaryMobile: req.body.mobile1,alternateMobile: req.body.mobile2,  address: req.body.address,manager: req.body.rmanager, payRollType: req.body.epayroll,cost: req.body.ctc}},{multi:true},function(err,data){
+      console.log(data);
+ if(err){
+    res.json({status:0,msg:'Failed to updated'});
+ }
+ else if(data){
+  res.json({status:1,msg:'updated Successfully'});
+ }
+})
 }

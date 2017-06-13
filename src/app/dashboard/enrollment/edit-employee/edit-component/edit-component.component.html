@@ -4,22 +4,24 @@
       <button class="close" id="close" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
+    <h3 id="title">Employee Details :-</h3>
       <form role="form" (submit)="update(user)" novalidate #registerForm='ngForm' name="registerForm" class="form">
 
         <!--h3>New Employee Registration</h3-->
+        <div class="row" >
+          <h3 id="id">Employee-ID : {{user.id}}</h3>
+        </div>
         <div class="row">
           <div class="col-xs-6 col-md-6">
-            <input type="text" name="ename" [(ngModel)]="user.ename" value="" class="form-control input-lg" placeholder="Employee Name"
-              required/> </div>
+            <input type="text" name="ename" [(ngModel)]="user.ename" value="" class="form-control input-lg" placeholder="Employee Name" readonly/> </div>
           <div class="col-xs-6 col-md-6">
-            <input type="text" name="email" [(ngModel)]="user.email" class="form-control input-lg" placeholder="Personal Email" required
-            /> </div>
+            <input type="text" name="email" [(ngModel)]="user.email" class="form-control input-lg" placeholder="Personal Email" readonly/> </div>
         </div>
 
-        <div class="row">
+          <div class="row">
           <div class="col-xs-6 col-md-6">
             <select id="select" class="form-control input-lg" name="erole" [(ngModel)]="user.erole">
-                      <option value="" selected disabled>Employee Role</option>
+                      <option value="" disabled>Employee Role</option>
                       <option value="HR Executive">HR Executive</option>
                       <option value="Manager">Manager</option>
                         <option value="Employee">Employee</option>
@@ -27,12 +29,11 @@
           </div>
           <div class="col-xs-6 col-md-6">
             <select id="select" [(ngModel)]="user.etype" name="etype" class="form-control input-lg">
-                      <option value="" selected disabled>Employee Type</option>
-                      <option value="Permanent">Permanent</option>
-                      <option value="Temporary">Temporary</option>
-                        <option value="Contract">Contract</option>
-
-                  </select>
+                <option value="" selected disabled>Employee Type</option>
+                <option value="Permanent">Permanent</option>
+                <option value="Temporary">Temporary</option>
+                <option value="Contract">Contract</option>
+            </select>
           </div>
         </div>
         <div class="row">
@@ -44,24 +45,24 @@
                       <option value="" selected disabled>Payroll Type</option>
                       <option value="Weekly">Weekly</option>
                       <option value="Biweekly">Biweekly</option>
-                        <option value="Monthly">Monthly</option>
+                      <option value="Monthly">Monthly</option>
 
-                  </select>
+              </select>
           </div>
 
         </div>
         <div class="row">
           <div class="col-xs-6 col-md-6">
-            <input type="text" [(ngModel)]="user.designation" name="designation" class="form-control input-lg" placeholder="Designation"
-              required /></div>
+            <input type="text" [(ngModel)]="user.designation" name="designation" class="form-control input-lg" placeholder="Designation" required />
+          </div>
           <div class="col-xs-6 col-md-6">
-            <select id="select" [(ngModel)]="user.rmanager" name="rmanager" class="form-control input-lg">
-                      <option value="" selected disabled>Reporting Manager ID</option>
-                      <option  *ngFor="let manager of managers" [ngValue]="manager">{{manager}}</option> 
+            <select id="select" [(ngModel)]="user.reportingManager" name="rmanager" class="form-control input-lg" [value]='user.reportingManager'>
+                      <option value="" selected disabled> Reporting Manager Id</option>
+                      <option  *ngFor="let manager of managers" [value]="manager">{{manager}}</option> 
                   </select>
           </div>
         </div>
-
+ 
           <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <input type="text" name="mobile1" [(ngModel)]="user.mobile1" class="form-control input-lg" placeholder="Primary mobile number" required/> </div>
@@ -71,23 +72,22 @@
                 <label> Joined Date:</label>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <input type="date" name="doj" [(ngModel)]="user.doj"  class="form-control input-lg" /> </div>
-
+                        <input type="date" name="doj" [(ngModel)]="user.doj"  class="form-control input-lg" readonly/> </div>
                 </div>
                 <label>Address:</label>
                 <input type="textarea" name="address" [(ngModel)]="user.address" class="form-control input-lg" />
 
                 <label>Birth Date:</label>
-                <input type="date" name="dob" [(ngModel)]="user.dob" class="form-control input-lg" />
+                <input type="date" name="dob" [(ngModel)]="user.dob" class="form-control input-lg" readonly/>
 
                 <!--label>Gender : </label>
                 <input type="radio" name="gender" value="Male" [(ngModel)]="user.gender" required #gender="ngModel">Male
                 <input type="radio" name="gender" value="Female" [(ngModel)]="user.gender" required #gender="ngModel">Female-->
                 <div>
                     <label>Job Status:</label>
-                    <input type="checkbox" [(ngModel)]="user.jobstatus" name="jobstatus" value="job status" required>
+                    <input type="checkbox" [(ngModel)]="user.jobstatus" name="jobstatus" value="job status" readonly>
                 </div>
-        <button class="btn btn-lg btn-primary  signup-btn" type="submit" [disabled]='!registerForm.form.valid'> Update</button>
+        <button class="btn btn-lg btn-primary  signup-btn" type="submit" > Update</button>
          <button class="btn btn-danger btn-lg" (click)="closeModal()">Close</button>
       </form>
     </div>

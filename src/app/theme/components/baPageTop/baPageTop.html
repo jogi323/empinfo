@@ -11,7 +11,7 @@
         [searchProperty]="'personalEmail'|| 'employeeName' || 'id'" [displayProperty]="'employeeName'"
         [maxSuggestions]="2"
         (suggestionSelected)="empSelected($event)"
-        placeholder="Begin typing a fruit">
+        placeholder="Begin typing a employee details">
       </typeahead>
   </div>
   <div class="search-icon"><i class="ion-ios-search-strong" (click)="startSearch()"></i></div>
@@ -22,7 +22,7 @@
         <img [src]=image_path/>
       </a>
       <ul class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
-        <li class="dropdown-item"><a href><i class="fa fa-user"></i>Profile</a></li>
+        <li class="dropdown-item" ><a routerLink="/dashboard/profile"><i class="fa fa-user"></i>Profile</a></li>
         <li class="dropdown-item"><a href><i class="fa fa-cog"></i>Settings</a></li>
         <li class="dropdown-item" (click)="signout(user)"><a href class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
       </ul>

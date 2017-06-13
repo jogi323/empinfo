@@ -17,9 +17,22 @@ button#close {
     float: right;
     margin-right: -48%;
     margin-top: 2%;
-    color: red;
+    color: white;
     font-weight: 400;
 }
 button.btn.btn-danger.btn-lg {
     float: right;
+}
+h3{
+    color: white;
+}
+h3#id {
+    margin-left: 30%;
+}
+h3#title {
+    margin-top: 5%;
+}
+form.form.ng-untouched.ng-pristine.ng-invalid {
+    width: 500px;
+    margin-left: -16%;
 }

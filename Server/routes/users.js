@@ -31,6 +31,10 @@ router.post('/createEmployee', function(req, res, next) {
 router.post('/timesheet', function(req, res, next) {
    controller.performAction(req,res);
 });
+/*  Post Action for TimeSheet. */
+router.post('/updateuserdetails', function(req, res, next) {
+   controller.updateUser(req,res);
+});
 /* GET Actions for Managers List */
 router.get('/managers', function(req, res, next) {
    controller.managersList(req,res);
@@ -38,8 +42,8 @@ router.get('/managers', function(req, res, next) {
 router.get('/usersdata', function(req, res) {
     controller.allUsers(req, res);
 });
-
-router.get('/search', function(req, res, next) {
-   controller.search(req,res);
+// Get Action to get User Details
+router.get('/empdetails/:id', function(req, res, next) {
+   controller.empdetails(req,res);
 });
 module.exports = router;

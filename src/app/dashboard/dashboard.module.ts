@@ -12,6 +12,7 @@ import { CalendarService } from './timesheet/calendar.service';
 import { TimesheetdataComponent } from './timesheet/timesheetdata/timesheetdata.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { EditComponentComponent } from './enrollment/edit-employee/edit-component/edit-component.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { EditComponentComponent } from './enrollment/edit-employee/edit-componen
     entryComponents: [
      TimesheetdataComponent,EditComponentComponent
   ],
-  declarations: [DashboardComponent, TimesheetComponent,TimesheetdataComponent, PayrollComponent,EditComponentComponent],
+  declarations: [DashboardComponent, TimesheetComponent,TimesheetdataComponent, PayrollComponent,EditComponentComponent, ProfileComponent],
   providers: [CalendarService]
 })
 export class DashboardModule { }

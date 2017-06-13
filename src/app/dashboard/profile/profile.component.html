@@ -1,0 +1,40 @@
+<div *ngIf="userDetails">
+  <div class="table-responsive">
+    <img [src]=image_path>
+    <table class="table table-bordred table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Emp.Id</b> </td>
+          <td>{{userDetails.employeeId}}</td>
+        </tr>
+        <tr>
+          <td><b>Name</b> </td>
+          <td>{{userDetails.employeeName}}</td>
+        </tr>
+        <tr>
+          <td><b>Email-Id</b> </td>
+          <td>{{userDetails.personalEmail}}</td>
+        </tr>
+        <tr>
+          <td><b>Designation</b> </td>
+          <td>{{userDetails.designation}}</td>
+        </tr>
+        <tr>
+          <td><b>EmployeeType</b> </td>
+          <td>{{userDetails.employeeType}}</td>
+        </tr>
+        <tr>
+          <td><b>MobileNumber</b> </td>
+          <td>{{userDetails.primaryMobile}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
