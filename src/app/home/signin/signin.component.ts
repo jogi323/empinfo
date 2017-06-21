@@ -50,7 +50,7 @@ export class SigninComponent {
              this.router.navigate(['changepassword']);
          }else{
            this.router.navigate(['dashboard']);
-           sessionStorage.setItem("token",this.token);
+          //  sessionStorage.setItem("token",this.token);
          }
        }else{
           swal("Inavlaid Credentials!");

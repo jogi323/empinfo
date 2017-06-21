@@ -44,33 +44,15 @@ this.navbarService.url = "http://localhost:8080/users/usersdata";
     console.log(this.empNames );
   })
 }
- fruitName: string;
+
  employeeName :any;
-    fruits: any[] = [
-      {
-        id: 1,
-        name: "Apple",
-        searchText: "apple"
-      },
-      {
-        id: 2,
-        name: "Orange",
-        searchText: "orange"
-      },
-      {
-        id: 3,
-        name: "Banana",
-        searchText: "banana"
-      }
-    ];
-   
-  selectedFruit: any = '';
+    
+
   selectedId: any = '';
-  public fruitSelected(fruit) {
-    this.fruitName = fruit ? fruit.name : 'none';
-  }
+
     public empSelected(selectedEmp) {
     this.employeeName = selectedEmp ? selectedEmp.employeeName : 'none';
+    // console.log(this.employeeName);
   }
   public toggleMenu() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
@@ -86,6 +68,6 @@ this.navbarService.url = "http://localhost:8080/users/usersdata";
     this.router.navigate(['']);
   }
   startSearch(){
-    console.log('user');
+    console.log(this.employeeName);
   }
 }

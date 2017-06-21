@@ -14,17 +14,23 @@ export class EditEmployee implements OnInit {
 usersdata:any[];
 userdetails:any[]
 data;
+user;
   constructor(private usersService:AppService,private modalService: NgbModal,
-  private router:Router) { }
+  private router:Router) { 
+    this.user = [];
+  }
 
 userDetails(user){
   this.router.navigate(['dashboard/enrollment/editemployee']);
 }
 editEmployee(user){
-  // console.log(user);
+ 
+  this.user[0] = user;
+
    const activeModal = this.modalService.open(EditComponentComponent, {size: 'lg',backdrop: 'static'});
       activeModal.componentInstance.modalHeader = 'Child modal';
-      activeModal.componentInstance.modalContent = user;
+      activeModal.componentInstance.modalContent = this.user;
+      
 }
   ngOnInit() {
     this.usersService.url="http://localhost:8080/users/usersdata";

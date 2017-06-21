@@ -497,9 +497,9 @@ exports.empdetails = function(req,res){
     })
 }
 exports.updateUser = function(req,res){
-   var id=req.body.id;
+   var id=req.body.employeeId;
    console.log(id);
-  Employee.update({employeeId:id,personalEmail:req.body.email},{$set:{employeeType: req.body.etype, role: req.body.erole,designation: req.body.designation,primaryMobile: req.body.mobile1,alternateMobile: req.body.mobile2,  address: req.body.address,manager: req.body.rmanager, payRollType: req.body.epayroll,cost: req.body.ctc}},{multi:true},function(err,data){
+  Employee.update({employeeId:id,personalEmail:req.body.personalEmail},{$set:{employeeType: req.body.etype, role: req.body.erole,designation: req.body.designation,primaryMobile: req.body.mobile1,alternateMobile: req.body.mobile2,  address: req.body.address,manager: req.body.rmanager, payRollType: req.body.epayroll,cost: req.body.ctc}},{multi:true},function(err,data){
       console.log(data);
  if(err){
     res.json({status:0,msg:'Failed to updated'});

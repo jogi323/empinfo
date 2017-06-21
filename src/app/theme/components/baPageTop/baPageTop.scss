@@ -199,14 +199,14 @@
   .profile-toggle-link {
     cursor: pointer;
   }
-  .ngui-auto-complete {
-      z-index: 1000 !important;
-    height: auto !important;
-    position: relative !important;
-    overflow: scroll !important;
-    color: black;
-}
-.ngui-auto-complete > ul li.selected { color: #000;}
-.search-main .search { height: 200px; overflow-y: scroll;}
-.ngui-auto-complete { width: 200px;}
+//   .ngui-auto-complete {
+//       z-index: 1000 !important;
+//     height: auto !important;
+//     position: relative !important;
+//     overflow: scroll !important;
+//     color: black;
+// }
+// .ngui-auto-complete > ul li.selected { color: #000;}
+// .search-main .search { height: 200px; overflow-y: scroll;}
+// .ngui-auto-complete { width: 200px;}
 }

@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
 import { AppTranslationModule } from '../app.translation.module';
-// import { Typeahead } from 'ng2-typeahead';
+import { Typeahead } from 'ng2-typeahead';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 import {
@@ -75,7 +75,7 @@ const NGA_COMPONENTS = [
   BaPictureUploader,
   BaSidebar,
   BaFileUploader,
-  //Typeahead ,
+  Typeahead ,
 ];
 
 const NGA_DIRECTIVES = [

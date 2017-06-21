@@ -24,17 +24,7 @@ constructor(private router:Router, private updateService:AppService, private act
 }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("user")); 
-      // console.log(this.user);
-      this._id = (this.user)[0]._id; 
-      // console.log(this._id); 
-      this.updateService.url = "http://localhost:8080/users/empdetails/"+this._id;
-      this.updateService.getService().subscribe(res =>  {
-     // console.log(res); 
-      this.userDetails = res["data"][0];
-      console.log(this.userDetails);
-
-      this.updateService.url = "http://localhost:8080/users/managers";
+     this.updateService.url = "http://localhost:8080/users/managers";
       this.updateService.getService().subscribe(res=>{
         // console.log(res);
           this.data = res;
@@ -42,35 +32,57 @@ constructor(private router:Router, private updateService:AppService, private act
            (this.data).forEach(element => {
              //console.log(element);
              this.managers.push(element.employeeId);
-         //console.log(this.managers);
-      });
-    })
-      this.user =  {
-        id:this.userDetails.employeeId,
-        ename:this.userDetails.employeeName, 
-        email:this.userDetails.personalEmail, 
-        erole:this.userDetails.role, 
-        etype:this.userDetails.employeeType, 
-        ctc:this.userDetails.cost, 
-        epayroll:this.userDetails.payRollType, 
-        designation:this.userDetails.designation, 
-        reportingManager:this.userDetails.manager, 
-        mobile1:this.userDetails.primaryMobile, 
-        mobile2:this.userDetails.alternateMobile, 
-        dob:this.userDetails.dob, 
-        doj:this.userDetails.joinedOn, 
-        address:this.userDetails.address, 
         
-        jobstatus:this.userDetails.status,
-      }
-     // console.log(this.user);
-    })
+      });
+       //console.log(this.managers);
+   });
+    // this.user = JSON.parse(localStorage.getItem("user")); 
+    //   // console.log(this.user);
+    //   this._id = (this.user)[0]._id; 
+    //   // console.log(this._id); 
+    //   this.updateService.url = "http://localhost:8080/users/empdetails/"+this._id;
+    //   this.updateService.getService().subscribe(res =>  {
+    //  // console.log(res); 
+    //   this.userDetails = res["data"][0];
+    //   console.log(this.userDetails);
+
+    //   this.updateService.url = "http://localhost:8080/users/managers";
+    //   this.updateService.getService().subscribe(res=>{
+    //     // console.log(res);
+    //       this.data = res;
+    //       //console.log(this.data);
+    //        (this.data).forEach(element => {
+    //          //console.log(element);
+    //          this.managers.push(element.employeeId);
+    //      //console.log(this.managers);
+    //   });
+    // })
+    //   this.user =  {
+    //     id:this.userDetails.employeeId,
+    //     ename:this.userDetails.employeeName, 
+    //     email:this.userDetails.personalEmail, 
+    //     erole:this.userDetails.role, 
+    //     etype:this.userDetails.employeeType, 
+    //     ctc:this.userDetails.cost, 
+    //     epayroll:this.userDetails.payRollType, 
+    //     designation:this.userDetails.designation, 
+    //     reportingManager:this.userDetails.manager, 
+    //     mobile1:this.userDetails.primaryMobile, 
+    //     mobile2:this.userDetails.alternateMobile, 
+    //     dob:this.userDetails.dob, 
+    //     doj:this.userDetails.joinedOn, 
+    //     address:this.userDetails.address, 
+        
+    //     jobstatus:this.userDetails.status,
+    //   }
+    //  // console.log(this.user);
+    // })
   }
   closeModal() {
     this.activeModal.close(); 
   }
   update(user){
-    console.log(user);
+   // console.log(user);
     this.updateService.url = "http://localhost:8080/users/updateuserdetails";
     this.updateService.data = user;
     this.updateService.postService().subscribe(res => {

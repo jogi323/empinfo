@@ -11,9 +11,9 @@ export class AppService{
   authToken;
   user;
   forgotPasswordEmail;
-  
+  //editUserDetails;
 constructor(private _http:Http){
-  
+ 
 }
 getService(){
     var headers = new Headers;

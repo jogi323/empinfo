@@ -40,21 +40,22 @@ private modalService: NgbModal, private calendarService: AppService) {
        // console.log(res);
         (res).forEach(element => {
           // console.log(element);
-          var sss ={"title":"","start":"", "color": dashboardColors.blueStone};
+          var sss ={"title":"","start":"", "color": dashboardColors.blueStone,editable:false};
           
           (element["data"]).forEach(element => {
             
              if(element["workingHours"] != undefined) {
-                 sss['title'] = element['workingHours'];
+                 sss['title'] = 'Workedhours :' + element['workingHours'];
              }
             else{
               sss['start'] = element['date'].toLocaleString().slice(0,10);
+              // sss['draggable'] = false;
               // console.log(sss["start"]);
             }
           });
           this.data.push(sss);
           this.dataAvailable = true;
-         // console.log(this.data);
+         console.log(this.data);
         });
           // this.publishData(this.data);
     })
@@ -67,12 +68,15 @@ private modalService: NgbModal, private calendarService: AppService) {
   public onCalendarReady(calendar): void {
     // console.log("fvjafha");
     this._calendar = calendar;
+    
      // console.log(calendar);
      let eventData;
      eventData = this.data;
-     console.log('eventData' + this.data);  
+
+    console.log(eventData);  
      jQuery(this._calendar).fullCalendar('addEventSource', eventData);
-  }
+
+    }
 
   private _onSelect(start, end): void {
     if (this._calendar != null) {

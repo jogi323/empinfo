@@ -64,9 +64,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 app.post('/uploads', function(req, res,next) {
-
-console.log("fkjfjf")
-
      upload(req,res,function(err){
          console.log("body:");
          console.log(req.body);
