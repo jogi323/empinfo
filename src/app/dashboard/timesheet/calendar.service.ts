@@ -8,6 +8,7 @@ export class CalendarService {
 data;
 _id;
 user;
+finalDate:any;
   constructor(private _baConfig:BaThemeConfigProvider,private calendarService:AppService) {
      let dashboardColors = this._baConfig.get().colors.dashboard;
 
@@ -74,14 +75,19 @@ user;
   getData(data) {
         console.log(data);
      let dashboardColors = this._baConfig.get().colors.dashboard;
-      
+      var date = new Date(),
+          month = '' + (date.getMonth() + 1),
+          day = '' + date.getDate(),
+          year = date.getFullYear();
+          this.finalDate = [year, month, day].join('-');
+      console.log(this.finalDate);
     return {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month,agendaWeek,agendaDay',
       },
-      defaultDate: '2017-05-08',
+      defaultDate: this.finalDate,
       selectable: true,
       selectHelper: true,
       editable: true,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import { AppService } from "../../../app.service";
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-timesheetdata',
@@ -34,7 +35,7 @@ export class TimesheetdataComponent implements OnInit {
     this.TimeSheetService.data = values;
     this.TimeSheetService.postService().subscribe(res =>{
       console.log(res);
-      console.log(res["status"]);
+      swal('Data Saved.')
     });
   }
   ngOnInit() {

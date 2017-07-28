@@ -20,26 +20,16 @@ export class TimesheetComponent implements OnInit {
   data;
   _id;
   user;
+  finalDate:any;
   dataAvailable:Boolean = false;
 constructor(private _calendarService:CalendarService, private _baConfig: BaThemeConfigProvider,
 private modalService: NgbModal, private calendarService: AppService) {
   let dashboardColors = this._baConfig.get().colors.dashboard;
-  //     // this.timesheetdata = this._calendarService.data;
-  //     this._calendarService.caseNumber$.subscribe(res => {
-  //      this.data = res;
-  //   //       // this. calendarConfiguration2 = this._calendarService.getData(this.timesheetdata);
-  //   //       // this.calendarConfiguration = this._calendarService.getData(this.timesheetdata);
-  //   //       // this.onCalendarReady(this._calendar);
-  //    });
     this.user = JSON.parse(localStorage.getItem("user"));
-   // console.log(this.user);
     this._id = (this.user)[0].timesheets;
-    // console.log(this._id);
         this.calendarService.url = 'http://localhost:8080/timesheet/getdata/' + this._id;
     this.calendarService.getService().subscribe(res => {
-        console.log(res);
         (res).forEach(element => {
-          // console.log(element);
           var sss ={"title":"","start":"", "color": dashboardColors.blueStone,editable:false};
           
           (element["data"]).forEach(element => {
@@ -49,16 +39,12 @@ private modalService: NgbModal, private calendarService: AppService) {
              }
             else{
               sss['start'] = element['date'].toLocaleString().slice(0,10);
-              // sss['draggable'] = false;
-              // console.log(sss["start"]);
             }
           });
           this.data.push(sss);
           this.dataAvailable = true;
-          console.log(this.data);
         });
-          // this.publishData(this.data);
-    })
+    });
 
         this.calendarConfiguration = this.getData();
         this.calendarConfiguration.select = (start, end) => this._onSelect(start, end); 
@@ -66,76 +52,49 @@ private modalService: NgbModal, private calendarService: AppService) {
   }
 
   public onCalendarReady(calendar): void {
-    // console.log("fvjafha");
     this._calendar = calendar;
-    
-     // console.log(calendar);
      let eventData;
      eventData = this.data;
-
-    console.log(eventData);  
      jQuery(this._calendar).fullCalendar('addEventSource', eventData);
 
     }
 
   private _onSelect(start, end): void {
     if (this._calendar != null) {
-      //console.log(start._d );
       var day = start._d;
-      //var date = day.toLocaleDateString();
-      //console.log(date); 
       const activeModal = this.modalService.open(TimesheetdataComponent, { size: 'lg', backdrop: 'static'});
       activeModal.componentInstance.modalHeader = 'Child modal';
       activeModal.componentInstance.modalContent = day;
-
-      // activeModal.componentInstance.modalMethod = this.timesheetSubmit();
-//         let title = prompt('Event Title:');
-//       let eventData;
-//       var date = new Date();
-//         var d = date.getDate();
-//         var m = date.getMonth();
-//         var y = date.getFullYear();
-//       if (title) {
-//         eventData = {
-//           title: title,
-//           start: new Date(y, m, d)
-// ,
-//           end: end
-//         };
-//         jQuery(this._calendar).fullCalendar('renderEvent', eventData, true);
-//       }
       jQuery(this._calendar).fullCalendar('unselect');
     }
   }
-// private caseNumber = new Subject<any>();
-//   caseNumber$ = this.caseNumber.asObservable();
-//     publishData(Data) {
-//     console.log("%%%%%%%%%%%%%");
-//     console.log(Data);
-//     this.caseNumber.next(Data);
-// }
   
 ngOnInit(){
     let dashboardColors = this._baConfig.get().colors.dashboard;
     this.user = JSON.parse(localStorage.getItem("user"));
-   // console.log(this.user);
     this._id = (this.user)[0].timesheets;
-    // console.log(this._id);
-
-
-
   }
    private getData() {
-     // console.log('getdata' + " " + data);
      let dashboardColors = this._baConfig.get().colors.dashboard;
-      
+      var date = new Date(),
+            month = '' + (date.getMonth() + 1),
+            day = '' + date.getDate(),
+            year = date.getFullYear();
+            if (month.length < 2) {
+              month = '0' + month;
+            } 
+            if (day.length < 2) {
+               day = '0' + day;
+            }
+            this.finalDate = [year, month, day].join('-');
+        
     return {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month,agendaWeek,agendaDay',
       },
-      defaultDate: '2017-05-08',
+      defaultDate: this.finalDate,
       selectable: true,
       selectHelper: true,
       editable: true,
