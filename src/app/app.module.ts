@@ -17,6 +17,9 @@ import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 
+// modal components
+import { EditComponentComponent } from './dashboard/enrollment/edit-employee/edit-component/edit-component.component';
+import { TimesheetdataComponent } from './dashboard/timesheet/timesheetdata/timesheetdata.component';
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
@@ -36,7 +39,8 @@ export type StoreType = {
   bootstrap: [App],
   declarations: [
     App,
-     
+    EditComponentComponent,
+    TimesheetdataComponent, 
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -53,6 +57,9 @@ export type StoreType = {
     APP_PROVIDERS,
     AppService
     //  { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
+  entryComponents: [
+    EditComponentComponent, TimesheetdataComponent,
   ]
 })
 

@@ -1,3 +1,91 @@
-<p>
-  payroll works!
-</p>
+
+<!--<h4 class="text-center text-danger " style="margin-bottom: 2pc;"><u>PayRoll Application</u></h4>-->
+<div class="container">
+    <form>
+
+
+        <div class="row form-group">
+
+            <div class="col-md-4 form-control">
+                <label class="radio-inline" *ngFor="let payroll of payrolls;let idx = index">
+              <input type="radio" name="radiogroup"  [checked]="idx===0" [value]="payroll.types" (click)="onSelectionChange(payroll.types)"
+              [(ngModel)]="data.paytype">
+                {{payroll.types}}
+          </label>
+            </div>
+        </div>
+
+        <div class="row form-group">
+        <div class="col-md-6 form-control">
+           <label for="year">Year:</label>
+           <select name="year" id="year" (change)="payroll_year(data.payYear)" [(ngModel)]="data.payYear">
+			       <option *ngFor="let obj of years" value="{{obj.year}}">{{obj.year}}</option>
+			       </select>
+        <div class="col-md-6">
+           <label for="month">Month:</label>
+           <select name="month" id="month" [(ngModel)]="data.payMonth">
+             <option *ngFor="let obj of populate" value="{{obj.month}}">{{obj.month}}</option>
+			       </select>
+	           
+	            </div>
+	            </div>
+              
+	</div>
+
+        <div class="row form-group">
+            <div class="form-control " style="height: 9pc;">
+                <h5 class=" text-danger">Employee Type</h5>
+                <label class="radio-inline "><input type="radio" name="optradio" checked="checked">Salary</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Hourly</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Independent</label>
+                <div style="margin-top: 19px;">
+                    <button type="button" class="btn btn-primary" (click)="getData(data)">GetPayroll</button>
+                    <button type="button" class="btn btn-primary ">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <h2  *ngIf = "isData" style="color:red" class="text-center row">No Records Found</h2>
+    <div *ngIf ="!(isData)" class="tex-center">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>
+                    S.NO
+                </th>
+                <th>
+                    Employee ID
+                </th>
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Working Location
+                </th>
+                <th>
+                    Total Billable Hours
+                </th>
+                <th>
+                    Total Worked Hours
+                </th>
+                <th>
+                    Base Pay
+                </th>
+            </tr>
+
+            <tr *ngFor="let obj of OutputData; let i = index">
+
+                <td>{{i+1}}</td>
+
+                <td><a (click)="individualPayslip(obj.EmployeeID)" style="cursor:pointer">{{obj.EmployeeID}}</a></td>
+                <td>{{obj.EmployeeName}}</td>
+                <td>{{obj.BusinessUnit}}</td>
+                <td></td>
+                <td>{{obj.totalHours}}</td>
+                <td>{{obj.BasePay}}</td>
+
+            </tr>
+
+        </table>
+    </div>
+</div>

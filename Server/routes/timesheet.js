@@ -5,7 +5,6 @@ var timesheetController = require('../controllers/timesheet');
 
 /* Post Action for Employee Login. */
 router.post('/', function(req, res, next) {
-    //console.log(req.params.id);
    timesheetController.insertData(req,res);
 });
 

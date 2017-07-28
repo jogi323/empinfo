@@ -6,18 +6,18 @@ var Employee = require('../model/empschema');
 exports.insertData = function(req, res){
     console.log("parameters"+ req.query);
     var month = new Array();
-    month[0] = "January";
-    month[01] = "February";
-    month[02] = "March";
-    month[03] = "April";
-    month[04] = "May";
-    month[05] = "June";
-    month[06] = "July";
-    month[07] = "August";
-    month[08] = "September";
-    month[09] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    month[01] = "January";
+    month[02] = "February";
+    month[03] = "March";
+    month[04] = "April";
+    month[05] = "May";
+    month[06] = "June";
+    month[07] = "July";
+    month[08] = "August";
+    month[09] = "September";
+    month[10] = "October";
+    month[11] = "November";
+    month[12] = "December";
 
     var date = req.body.day;
     var dateParts = date.split('-');
@@ -100,14 +100,14 @@ exports.insertData = function(req, res){
                             }
                         }else{
                             console.log("month not matched");
-                            var dWork = {desc:req.body.desc, day:req.body.day, time:req.body.time}
+                            var dWork = {desc:req.body.desc, day:req.body.day, time:req.body.time};
                             var dayWork = {dayData:dWork, day:rDay}
-                            timesheetData.data.id(yearId).yearData.push({monthData:dayWork, month:rMonth})
+                            timesheetData.data.id(yearId).yearData.push({monthData:dayWork, month:rMonth});
                             timesheetData.save();
                             console.log("month created");
                             res.status(201).json({
                                     message: 'Saved message',
-                                    obj: result
+                                    //obj: result
                                 });
                         }
                     }//if year present and mathes the received year
@@ -203,7 +203,7 @@ exports.getData = function(req, res){
                             for(var k = 0; k<tsData.data[i].yearData[j].monthData.length;k++){
                                // console.log(tsData.data[i].yearData[j].monthData[k].dayData)
                                var ts = [{workingHours:tsData.data[i].yearData[j].monthData[k].dayData.time},{date:tsData.data[i].yearData[j].monthData[k].dayData.day}]
-                                dayData.push({data : ts})
+                                dayData.push({data : ts});
                                // console.log(dayData[tsData.data[i].yearData[j].monthData.length]);
                             }
                         }
@@ -211,7 +211,7 @@ exports.getData = function(req, res){
                     }
                     console.log(dayData)
 
-                    res.json(dayData)
+                    res.json(dayData);
                 }
             }) 
 }
@@ -237,8 +237,9 @@ exports.getData1 = function(req, res){
 exports.generatePayRoll = function(req, res) {
     console.log("req");
     console.log(req.body);
+    var statusCode,message;
     var payType = req.body.paytype;
-    var payYear = req.body.payRollYear;
+    var payYear = req.body.payYear;
     var payMonth = req.body.payMonth;
     var payMonthSub = payMonth.substring(0, 3);
     console.log(payYear);
@@ -247,38 +248,19 @@ exports.generatePayRoll = function(req, res) {
     var payRollArray = [];
     var timesheetarray = [];
     var workHours;
-    //   Employee.aggregate([
-    //     {
-    //       $lookup:
-    //         {
-    //           from: TimeSheet,
-    //           localField: "employeeId",
-    //           foreignField: "employeeid",
-    //           as: "Timesheet_workinghours"
-    //         }
-    //    }
-    // ]);
-    // console.log(obj);
     Employee.find({ payRollType: payType }, function(err, docs) {
         if (err) {
             console.log("error in executing query");
             throw err;
         } else if (docs[0] != null) {
-            // console.log("docs is");
-            // console.log(docs[0]);
-            //docs[0]["key"] = "value";
-            //console.log(docs[0].key);
             var docsLength = docs.length;
             var empid, empname, cost, address, timeSheetDataGlobal;
-            // console.log(docsLength);
             for (var i = 0; i < docsLength; i++) {
-                // payRollArray[i]["workingHours"]=0;
                 empid = docs[i].employeeId;
                 empname = docs[i].employeeName;
                 cost = docs[i].cost;
                 address = docs[i].address;
                 var timesheet = docs[i].timesheets;
-                // console.log(timesheet);
                 payRollArray.push({ EmployeeID: empid, EmployeeName: empname, BasePay: cost, BusinessUnit: address, timesheet: timesheet, totalHours: "" });
                 timesheetarray.push(new mongoose.Types.ObjectId(payRollArray[i].timesheet))
             }
@@ -288,7 +270,6 @@ exports.generatePayRoll = function(req, res) {
                 }
             }, (err, timesheetdata) => {
                 var count;
-                // var timeSheetArray = [];
                 if (err) {
                     console.log("error in executing query");
                     throw err;
@@ -305,6 +286,7 @@ exports.generatePayRoll = function(req, res) {
                         for (var i = 0; i < timeSheetDataGlobal.length; i++) {
                             var year = timeSheetDataGlobal[i].year;
                             if (year == payYear) {
+                                // statusCode = "02";
                                 console.log("selected year has some data");
                                 var monthData = timeSheetDataGlobal[i].yearData;
                                 for (var j = 0; j < monthData.length; j++) {
@@ -312,6 +294,8 @@ exports.generatePayRoll = function(req, res) {
                                     var monthSub = month.substring(0, 3);
                                     console.log(monthSub);
                                     if (payMonthSub == monthSub) {
+                                        // statusCode = "04";
+                                        statusCode = "00";
                                         console.log("selected month has some data");
                                         var selectedMonthData = monthData[j].monthData;
                                         for (var l = 0; l < selectedMonthData.length; l++) {
@@ -321,7 +305,6 @@ exports.generatePayRoll = function(req, res) {
                                                     console.log(dayData);
                                                     count = count + parseInt(dayData);
                                                     console.log("count");
-                                                    // payRollArray.push({ coun: count });
                                                     for (var k = 0; k < payRollArray.length; k++) {
                                                         if (employeeid == payRollArray[k].EmployeeID) {
                                                             console.log("same employee id");
@@ -419,33 +402,38 @@ exports.generatePayRoll = function(req, res) {
                                                 }
                                             }
                                         }
-
+                                        // statusCode = 21;
                                         // console.log("workinghours");console.log(docs[i].workingHours);
                                     } else {
                                         console.log("no data present in the selected month");
+                                        // statusCode = "05";
+                                        // message = "No data present in the selected month";
+                                        // res.json({Message:message,StatusCode:statusCode});
                                     }
                                 }
+                                // statusCode = 11;
                             } else {
+                                // statusCode = "03";
                                 console.log("no data present in the selected year");
+                                // message = "No data present in the selected year";
+                                // res.json({StatusCode:statusCode,Message:message});
                             }
                         }
                     }
-                    res.json({ PayRollArray: payRollArray });
-                    // console.log(year);
-                    // console.log("timesheet data is");
-                    // console.log(timesheetdata);
-                    // console.log(timeSheetDataGlobal);
-                    // timesheetarray.push({ timesheet: timeSheetDataGlobal });
-                    // console.log("timesheetarray is:");
-                    // console.log(timesheetarray);
-                    // res.json({ PayRollArray: payRollArray, TimeSheetArray: timesheetarray });
+                    res.json({ PayRollArray: payRollArray,Message:message,StatusCode:'00' });
                 } else {
                     console.log("No Data is present in timesheet");
+                    statusCode = "11";
+                    message = "No data present in the timesheet";
+                    res.json({Message:message,StatusCode:statusCode});
                 }
             });
 
         } else {
             console.log("No data is present");
+            statusCode ="01";
+            message = "No employees are with the selected paytype :"+payType;
+            res.json({Message:message,StatusCode:statusCode});
         }
     })
 }

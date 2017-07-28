@@ -37,7 +37,7 @@ private modalService: NgbModal, private calendarService: AppService) {
     // console.log(this._id);
         this.calendarService.url = 'http://localhost:8080/timesheet/getdata/' + this._id;
     this.calendarService.getService().subscribe(res => {
-       // console.log(res);
+        console.log(res);
         (res).forEach(element => {
           // console.log(element);
           var sss ={"title":"","start":"", "color": dashboardColors.blueStone,editable:false};
@@ -55,7 +55,7 @@ private modalService: NgbModal, private calendarService: AppService) {
           });
           this.data.push(sss);
           this.dataAvailable = true;
-         console.log(this.data);
+          console.log(this.data);
         });
           // this.publishData(this.data);
     })
