@@ -10,15 +10,13 @@ import { TranslateService } from '@ngx-translate/core';
  * Platform and Environment providers/directives/pipes
  */
 import { routing } from './app.routing';
-
+import { AppService } from './app.service';
 // App is our top level component
 import { App } from './app.component';
 import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 
-import { HomeModule } from './home/home.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
@@ -48,13 +46,12 @@ export type StoreType = {
     ReactiveFormsModule,
     NgaModule.forRoot(),
     NgbModule.forRoot(),
-   
     routing,
-    HomeModule,
-    DashboardModule
+    
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AppService
     //  { provide: LocationStrategy, useClass: HashLocationStrategy }
   ]
 })

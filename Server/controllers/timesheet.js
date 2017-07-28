@@ -233,4 +233,219 @@ exports.getData1 = function(req, res){
                 }
             }) 
             
+};
+exports.generatePayRoll = function(req, res) {
+    console.log("req");
+    console.log(req.body);
+    var payType = req.body.paytype;
+    var payYear = req.body.payRollYear;
+    var payMonth = req.body.payMonth;
+    var payMonthSub = payMonth.substring(0, 3);
+    console.log(payYear);
+    console.log(payType);
+    console.log(payMonth);
+    var payRollArray = [];
+    var timesheetarray = [];
+    var workHours;
+    //   Employee.aggregate([
+    //     {
+    //       $lookup:
+    //         {
+    //           from: TimeSheet,
+    //           localField: "employeeId",
+    //           foreignField: "employeeid",
+    //           as: "Timesheet_workinghours"
+    //         }
+    //    }
+    // ]);
+    // console.log(obj);
+    Employee.find({ payRollType: payType }, function(err, docs) {
+        if (err) {
+            console.log("error in executing query");
+            throw err;
+        } else if (docs[0] != null) {
+            // console.log("docs is");
+            // console.log(docs[0]);
+            //docs[0]["key"] = "value";
+            //console.log(docs[0].key);
+            var docsLength = docs.length;
+            var empid, empname, cost, address, timeSheetDataGlobal;
+            // console.log(docsLength);
+            for (var i = 0; i < docsLength; i++) {
+                // payRollArray[i]["workingHours"]=0;
+                empid = docs[i].employeeId;
+                empname = docs[i].employeeName;
+                cost = docs[i].cost;
+                address = docs[i].address;
+                var timesheet = docs[i].timesheets;
+                // console.log(timesheet);
+                payRollArray.push({ EmployeeID: empid, EmployeeName: empname, BasePay: cost, BusinessUnit: address, timesheet: timesheet, totalHours: "" });
+                timesheetarray.push(new mongoose.Types.ObjectId(payRollArray[i].timesheet))
+            }
+            TimeSheet.find({
+                '_id': {
+                    $in: timesheetarray
+                }
+            }, (err, timesheetdata) => {
+                var count;
+                // var timeSheetArray = [];
+                if (err) {
+                    console.log("error in executing query");
+                    throw err;
+                } else if (timesheetdata[0] != null) {
+                    console.log("timesheetdata:" + timesheetdata);
+                    var timesheetlength = timesheetdata.length;
+                    console.log(timesheetlength);
+                    for (var m = 0; m < timesheetlength; m++) {
+                        count = 0;
+                        employeeid = timesheetdata[m].employeeid;
+                        console.log(employeeid);
+                        timeSheetDataGlobal = timesheetdata[m].toObject().data;
+                        console.log(timeSheetDataGlobal);
+                        for (var i = 0; i < timeSheetDataGlobal.length; i++) {
+                            var year = timeSheetDataGlobal[i].year;
+                            if (year == payYear) {
+                                console.log("selected year has some data");
+                                var monthData = timeSheetDataGlobal[i].yearData;
+                                for (var j = 0; j < monthData.length; j++) {
+                                    var month = monthData[j].month;
+                                    var monthSub = month.substring(0, 3);
+                                    console.log(monthSub);
+                                    if (payMonthSub == monthSub) {
+                                        console.log("selected month has some data");
+                                        var selectedMonthData = monthData[j].monthData;
+                                        for (var l = 0; l < selectedMonthData.length; l++) {
+                                            var dayData = selectedMonthData[l].dayData.time;
+                                            if (payType == "Monthly") {
+                                                if (dayData != "") {
+                                                    console.log(dayData);
+                                                    count = count + parseInt(dayData);
+                                                    console.log("count");
+                                                    // payRollArray.push({ coun: count });
+                                                    for (var k = 0; k < payRollArray.length; k++) {
+                                                        if (employeeid == payRollArray[k].EmployeeID) {
+                                                            console.log("same employee id");
+                                                            payRollArray[k].totalHours = count;
+                                                        } else {
+                                                            console.log("not same employee id")
+                                                        }
+                                                    }
+                                                }
+                                            } else if (payType == "Weekly") {
+                                                count = 0;
+                                                console.log("selected pay type is weekly");
+                                                var weeklyStartDate;
+                                                if (payMonth[5] == "-") {
+                                                    weeklyStartDate = payMonth.substring(4, 5);
+                                                } else {
+                                                    weeklyStartDate = payMonth.substring(4, 6);
+                                                }
+                                                console.log("weekly start date is:" + weeklyStartDate);
+                                                var weekEndDate = parseInt(weeklyStartDate) + 6;
+                                                console.log("weekly end date is:" + weekEndDate);
+                                                // console.log(selectedMonthData);
+                                                var sortedData = selectedMonthData.sort(function(a, b) {
+                                                    return parseInt(a.day) - parseInt(b.day);
+                                                });
+                                                // console.log(sortedData);
+                                                for (var n = 0; n < sortedData.length; n++) {
+                                                    console.log(parseInt(sortedData[n].day));
+                                                    if (parseInt(sortedData[n].day) >= weeklyStartDate) {
+                                                        // console.log("1");
+                                                        console.log("first if called");
+                                                        if (parseInt(sortedData[n].day) <= weekEndDate) {
+                                                            // console.log("2");
+                                                            console.log("second if called");
+                                                            dayData = sortedData[n].dayData.time;
+                                                            if (dayData != "") {
+                                                                console.log(dayData);
+                                                                count = count + parseInt(dayData);
+                                                                console.log("count");
+                                                                // payRollArray.push({ coun: count });
+                                                                for (var s = 0; s < payRollArray.length; s++) {
+                                                                    if (employeeid == payRollArray[s].EmployeeID) {
+                                                                        console.log("same employee id");
+                                                                        payRollArray[s].totalHours = count;
+                                                                    } else {
+                                                                        console.log("not same employee id")
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else if (payType == "Bi-Weekly") {
+                                                count = 0;
+                                                console.log("selected pay type is bi-weekly");
+                                                var weeklyStartDate;
+                                                if (payMonth[5] == "-") {
+                                                    weeklyStartDate = payMonth.substring(4, 5);
+                                                } else {
+                                                    weeklyStartDate = payMonth.substring(4, 6);
+                                                }
+                                                console.log("weekly start date is:" + weeklyStartDate);
+                                                var weekEndDate = parseInt(weeklyStartDate) + 14;
+                                                console.log("weekly end date is:" + weekEndDate);
+                                                // console.log(selectedMonthData);
+                                                var sortedData = selectedMonthData.sort(function(a, b) {
+                                                    return parseInt(a.day) - parseInt(b.day);
+                                                });
+                                                // console.log(sortedData);
+                                                for (var n = 0; n < sortedData.length; n++) {
+                                                    console.log(parseInt(sortedData[n].day));
+                                                    if (parseInt(sortedData[n].day) >= weeklyStartDate) {
+                                                        // console.log("1");
+                                                        console.log("first if called");
+                                                        if (parseInt(sortedData[n].day) <= weekEndDate) {
+                                                            // console.log("2");
+                                                            console.log("second if called");
+                                                            var dayData = sortedData[n].dayData.time;
+                                                            if (dayData != "") {
+                                                                console.log(dayData);
+                                                                count = count + parseInt(dayData);
+                                                                console.log("count");
+                                                                // payRollArray.push({ coun: count });
+                                                                for (var s = 0; s < payRollArray.length; s++) {
+                                                                    if (employeeid == payRollArray[s].EmployeeID) {
+                                                                        console.log("same employee id");
+                                                                        payRollArray[s].totalHours = count;
+                                                                    } else {
+                                                                        console.log("not same employee id")
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        // console.log("workinghours");console.log(docs[i].workingHours);
+                                    } else {
+                                        console.log("no data present in the selected month");
+                                    }
+                                }
+                            } else {
+                                console.log("no data present in the selected year");
+                            }
+                        }
+                    }
+                    res.json({ PayRollArray: payRollArray });
+                    // console.log(year);
+                    // console.log("timesheet data is");
+                    // console.log(timesheetdata);
+                    // console.log(timeSheetDataGlobal);
+                    // timesheetarray.push({ timesheet: timeSheetDataGlobal });
+                    // console.log("timesheetarray is:");
+                    // console.log(timesheetarray);
+                    // res.json({ PayRollArray: payRollArray, TimeSheetArray: timesheetarray });
+                } else {
+                    console.log("No Data is present in timesheet");
+                }
+            });
+
+        } else {
+            console.log("No data is present");
+        }
+    })
 }

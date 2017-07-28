@@ -10,7 +10,7 @@ import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    path: '', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       { path: 'enrollment', loadChildren: './enrollment/enrollment.module#EnrollmentModule' },
       { path: 'timesheet', component: TimesheetComponent },

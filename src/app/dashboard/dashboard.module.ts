@@ -14,6 +14,8 @@ import { PayrollComponent } from './payroll/payroll.component';
 import { EditComponentComponent } from './enrollment/edit-employee/edit-component/edit-component.component';
 import { ProfileComponent } from './profile/profile.component';
 
+import { AuthGuard } from '../guards/auth.guard';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +28,6 @@ import { ProfileComponent } from './profile/profile.component';
      TimesheetdataComponent,EditComponentComponent
   ],
   declarations: [DashboardComponent, TimesheetComponent,TimesheetdataComponent, PayrollComponent,EditComponentComponent, ProfileComponent],
-  providers: [CalendarService]
+  providers: [CalendarService,AuthGuard]
 })
 export class DashboardModule { }
